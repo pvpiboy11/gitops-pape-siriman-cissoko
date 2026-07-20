@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pape-siriman-cissoko
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: pape-siriman-cissoko
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
