@@ -1,0 +1,33 @@
+name: CI - Build, Test, Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Connexion à Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build et push de l'image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./app
+          push: true
+          tags: papesiriman/pape-siriman-cissoko-app:${{ github.sha }}
+
+      - name: Installer Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: helm lint charts/pape-siriman-cissoko
