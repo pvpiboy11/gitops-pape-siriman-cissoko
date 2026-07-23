@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: papesiriman/pape-siriman-cissoko-app
-  tag: v1
+  tag: cf05c482376fe2042c5f887e746cf7419c6c039c
   pullPolicy: IfNotPresent
 
 service:
